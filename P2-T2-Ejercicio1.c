@@ -39,7 +39,7 @@ int main(){
     else{
        printf("-1");
     }
-    getchar();
+
 }
 void solicitar(char Cadena[n][10], char *Nombre){
 
