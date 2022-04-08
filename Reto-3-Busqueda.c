@@ -44,7 +44,7 @@ int main(){
         printf(" '%c' ",caracter);
     }
     else{
-        printf(" '%c' ",caracteres[0]);
+        printf("No existe un caracter mas pequeño en el arreglo que sea mayor que el caracter '%c' ",objetivo);
     }
 
 
