@@ -27,11 +27,14 @@
 
 #include "stdio.h"
 
-int regreso(char caracteres[3], char *caracter, char objetivo);
+int regreso(int tam, char caracteres[tam], char *caracter, char objetivo);
 int main(){
-    char caracteres[3], objetivo, caracter = 'a';
+    int tam;
+    printf("Dame el tamaño del arreglo: \t");
+    scanf("%d",&tam);
+    char caracteres[tam], objetivo, caracter = 'a';
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < tam; ++i) {
         printf("Dame un caracter: ");
         scanf("%s",&caracteres[i]);
     }
@@ -39,38 +42,42 @@ int main(){
     printf("Ahora dame un caracter objetivo: ");
     scanf("%s",&objetivo);
 
-    int res = regreso(caracteres, &caracter, objetivo);
+    int res = regreso(tam, caracteres, &caracter, objetivo);
     if(res){
         printf(" '%c' ",caracter);
     }
     else{
-        printf(" '%c' ",caracteres[0]);
+        printf(" '%c' ",caracter);
     }
 
 
     return 0;
 }
-int regreso(char caracteres[3], char *caracter, char objetivo){
+int regreso(int tam,char caracteres[tam], char *caracter, char objetivo){
+    int centro, primero, ultimo, central;
+    primero=0;
+    ultimo=tam-1;
+    while(primero <= ultimo){
+        centro = (primero + ultimo) /2 ;
+        central = caracteres[centro];
+        if(objetivo == central){
+            *caracter = caracteres[centro+1];
+            return 1;
+        }
+        else if(objetivo < central){
+            *caracter = caracteres[centro];
+            ultimo = centro-1;
+        }
+        else{
+            *caracter = caracteres[centro];
+            primero = centro+1;
+        }
+    }
 
-    if(objetivo > caracteres[2]){
+    if(objetivo > caracteres[tam-1]){
         *caracter = caracteres[0];
         return 1;
     }
 
-    if(objetivo <= caracteres[1]){
-        for (int i = 0; i < 2; ++i) {
-            if(objetivo < caracteres[i]){
-                *caracter = caracteres[i];
-                return 1;
-            }
-        }
-    }
-    else{
-         if(objetivo < caracteres[2]){
-             *caracter = caracteres[2];
-             return 1;
-         }
-
-    }
     return 0;
 }
